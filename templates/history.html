@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Task History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+    <div class="container">
+    <header>
+      <h1>Task History</h1>
+    </header>
+    {% if tasks %}
+  <table>
+    <tr>
+      <th>Task</th>
+      <th>Description</th>
+      <th>Who</th>
+      <th>Proof</th>
+      <th>Action</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+      <td><strong>{{ task['title'] }}</strong> - {{ task['points'] }} points</td>
+      <td>{{ task['description'] }}</td>
+      <td>{{ task['assigned_to'] }}</td>
+      <td>
+        {% if task['proof'] %}
+          <a href="{{ url_for('static', filename='uploads/' ~ task['proof']) }}" target="_blank">View Proof</a>
+        {% else %}
+          No proof
+        {% endif %}
+      </td>
+      <td>
+        <div class="adminbuttons">
+          
+        <form method="GET" action="{{ url_for('confirm_delete', task_id=task['id'], origin='history') }}">
+          <button type="submit">Delete</button>
+        </form>
+        </div>
+      </td>
+      
+      
+    </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No completed tasks yet.</p>
+{% endif %}
+
+    <br>
+    <footer>
+    <div class="adminbuttons">
+    <button id="home" onclick="location.href='/home'">Home</button>
+    </div>
+    </footer>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+  </body>
+</html>

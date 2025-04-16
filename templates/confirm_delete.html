@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Confirm Delete</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h2>Admin Password Required</h2>
+      <form method="POST" action="{{ url_for('delete_task', task_id=task_id) }}">
+        <input type="hidden" name="redirect_to" value="{{ origin }}">
+        <input type="password" name="password" placeholder="Enter admin password" required>
+        <button type="submit">Confirm Delete</button>
+      </form>
+      <br>
+      <button onclick="history.back()">Cancel</button>
+    </div>
+  </body>
+</html>

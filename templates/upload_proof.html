@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Upload Proof</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+    <h1>Upload Proof for Task #{{ task_id }}</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="proof" required><br><br>
+      <button type="submit">Upload Proof</button>
+    </form>
+    <br>
+    <a href="{{ url_for('account') }}">Back to Account</a>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </body>
+</html>

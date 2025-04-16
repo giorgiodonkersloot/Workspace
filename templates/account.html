@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ employee }}'s Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>{{ employee }}'s Account</h1>
+      </header>
+      
+      <h2>Tasks In Progress</h2>
+      {% if tasks_in_progress %}
+        <div class="task-grid">
+          {% for task in tasks_in_progress %}
+            <div class="task-card">
+              <strong>{{ task['title'] }}</strong><br>
+              <p>{{ task['points'] }} points</p>
+              <p>{{ task['description'] }}</p>
+              <a href="{{ url_for('upload_proof', task_id=task['id']) }}">Upload Proof</a>
+            </div>
+            <hr style="border: 1px solid #ccc; margin: 20px 0;">
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No tasks in progress.</p>
+      {% endif %}
+      
+      <h2>Completed Tasks</h2>
+      {% if completed_tasks %}
+        <div class="task-grid">
+          {% for task in completed_tasks %}
+            <div class="task-card">
+              <strong>{{ task['title'] }}</strong><br>
+              <p>{{ task['points'] }} points</p>
+              <p>{{ task['description'] }}</p>
+              {% if task['proof'] %}
+                <p>Proof: <a href="{{ url_for('static', filename='uploads/' ~ task['proof']) }}" target="_blank">View Proof</a></p>
+              {% endif %}
+            </div>
+            <hr style="border: 1px solid #ccc; margin: 20px 0;">
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No completed tasks.</p>
+      {% endif %}
+      
+      <br>
+      <div class="adminbuttons">
+        <button onclick="location.href='/home'">Home</button>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Available Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+    <div class="container">
+    <header>
+      <h1>Task Management System</h1>
+    </header>
+    {% if tasks %}
+  <table>
+    <tr>
+      <th>Task</th>
+      <th>Description</th>
+      <th>Points</th>
+      <th>Action</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+      <td><strong>{{ task['title'] }}</strong></td>
+      <td>{{ task['description'] }}</td>
+      <td>{{ task['points'] }}</td>
+      <td>
+        <div class="adminbuttons">
+          <a href="{{ url_for('claim_task', task_id=task['id']) }}">
+            <button>Claim Task</button>
+          </a>
+        
+          <form method="GET" action="{{ url_for('confirm_delete', task_id=task['id'], origin='tasks') }}" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+          
+        </div>
+        
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No available tasks at the moment.</p>
+{% endif %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer>
+  <div class="adminbuttons">
+    <button id="home" onclick="location.href='/home'">Home</button>
+  </div>
+</footer>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+    </div>
+  </body>
+</html>

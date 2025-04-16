@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Claim Task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+    <div class="container">
+      <header>  
+        <h1>Claim Task</h1>
+      </header>
+      <br>
+      <p>To claim this task, please re-enter your employee password.</p>
+
+      <form method="POST">
+        <input id="box" type="password" name="password" placeholder="Your Password" required>
+        
+        <div class="adminbuttons">
+          <button type="submit">Claim Task</button>
+        </div>
+      </form>
+      <br>
+      <footer>
+        <div class="adminbuttons">
+          <button id="back2tasks" onclick="location.href='/tasks'">Back to tasks</button>
+        </div>
+      </footer>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+  </body>
+</html>

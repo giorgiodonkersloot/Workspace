@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+    <div class="container">
+      <header>
+      <h1>Leaderboard</h1>
+      </header>
+      {% if leaderboard %}
+        <ol>
+        {% for entry in leaderboard %}
+          <h1>
+            {{ entry['assigned_to'] }}: {{ entry['total_points'] }} points
+          </h1>
+        {% endfor %}
+        </ol>
+      {% else %}
+        <p>No data to show on the leaderboard.</p>
+      {% endif %}
+      <br>
+      <div class="adminbuttons">
+      <button onclick="location.href='/home'">Home</button>
+      </div>
+    </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </body>
+</html>

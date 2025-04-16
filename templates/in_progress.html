@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Tasks In Progress</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+  <div class="container">
+    <header>
+      <h1>Tasks In Progress</h1>
+
+    </header>
+    {% if tasks %}
+  <table>
+    <tr>
+      <th>Task</th>
+      <th>Description</th>
+      <th>Claimed by</th>
+      <th>Action</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+      <td><strong>{{ task['title'] }}</strong> - {{ task['points'] }} pts</td>
+      <td>{{ task['description'] }}</td>
+      <td>{{ task['assigned_to'] }}</td>
+      <td>
+        <div class="adminbuttons">
+          
+        <form method="GET" action="{{ url_for('confirm_delete', task_id=task['id'], origin='in_progress') }}">
+          <button type="submit">Delete</button>
+        </form>
+        </div>
+        
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No tasks in progress.</p>
+{% endif %}
+
+<br>
+<footer>
+<div class="adminbuttons">
+  <button id="home" onclick="location.href='/home'">Home</button>
+</div>
+</footer>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+  </div>
+  </body>
+</html>

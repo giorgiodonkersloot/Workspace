@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Admin Dashboard</h1>
+      </header>
+    <p>Welcome, Admin!</p>
+    <div class="home-buttons">
+      <button onclick="location.href='/add_task'">Add New Task</button>
+      <form method="POST" action="{{ url_for('reset_scores') }}" onsubmit="return confirm('Are you sure you want to reset all scores?');">
+        <button type="submit">Reset All Scores</button>
+      </form>
+      <button onclick="location.href='/home'">Home</button>
+    </div>
+      
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Add Task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+    <h1>Add New Task</h1>
+    <form method="POST">
+      <label for="title">Title:</label><br>
+      <input type="text" id="title" name="title" required><br><br>
+
+      <label for="description">Description:</label><br>
+      <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+
+      <label for="points">Points:</label><br>
+      <input type="number" id="points" name="points" required><br><br>
+
+      <button type="submit">Add Task</button>
+    </form>
+    <br>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </body>
+</html>

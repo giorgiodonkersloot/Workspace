@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Employee Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+  </head>
+  <body>
+    <div class="container">
+        <div class="home-buttons">
+      <header>
+        <h1>Employee Login</h1>
+      </header>
+<br>
+      <form method="POST">
+        <input id="box" name="employee" placeholder="Employee Name" required><br>
+<br>
+        <input id="box" type="password" name="password" placeholder="Employee Password" required>
+          <div class="adminbuttons">
+            <button type="submit">Login</button>
+            <br>
+            <button id="home" onclick="location.href='/home'">Home</button>
+          </div>
+        
+      </form>
+    </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </body>
+</html>
