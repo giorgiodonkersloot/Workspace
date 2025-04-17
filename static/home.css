@@ -19,6 +19,9 @@
     padding: 20px;
     align-content: center;
     text-align: center;
+    display: flex;
+    flex-direction: column; /* o row, a seconda di cosa vuoi */
+    gap: 1rem;
   }
   
   /* Header styles */
@@ -157,4 +160,18 @@ th {
 .task-divider {
   border: 1px solid #ccc;
   margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .navbar {
+    flex-direction: column;
+  }
+
+  .some-class {
+    width: 100%;
+  }
 }
