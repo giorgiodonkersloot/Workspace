@@ -3,7 +3,7 @@
   <head>
     <title>Available Tasks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
-
+    <link rel="stylesheet" href='home.css'>
   </head>
   <body>
     <div class="container">
@@ -30,7 +30,9 @@
           </a>
         
           <form method="GET" action="{{ url_for('confirm_delete', task_id=task['id'], origin='tasks') }}" style="display:inline;">
-            <button type="submit">Delete</button>
+            <div class="delete">
+              <button type="submit">Delete</button>
+            </div>
           </form>
           
         </div>

@@ -3,6 +3,7 @@
   <head>
     <title>Add Task</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href='home.css'>
 
   </head>
   <body>
@@ -15,16 +16,18 @@
         <input id="box" type="text" id="title" name="title" required><br><br>
 
         <label for="description">Description:</label><br>
-        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+        <input id="box" id="description" name="description" rows="7" cols="60" required></input><br><br>
 
         <label for="points">Points:</label><br>
-        <input type="number" id="points" name="points" required><br><br>
-
+        <input id="box" type="number" id="points" name="points" required><br><br>
+        <div class="adminbuttons">
         <button type="submit">Add Task</button>
+        </div>
       </form>
-      <br>
-      <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
       
+      <div class="adminbuttons">
+        <button onclick="location.href='/admin_dashboard'">Go back</button>
+      </div>
       {% with messages = get_flashed_messages() %}
         {% if messages %}
           <ul>
